@@ -1,0 +1,33 @@
+# Build output
+bin/
+obj/
+publish/
+.vs/
+
+# AiRepoGuard report output
+airepoguard-report.json
+
+# Generated policy exports (regenerate from the source JSON)
+security/url-policy/out/
+security/app-policy/out/
+**/out/defender-indicators.csv
+**/out/AppLocker.xml
+
+# collect: event store and dashboard (contains user identities / match metadata)
+src/AiRepoGuard/data/
+**/data/events.jsonl
+*.jsonl
+**/dashboard.html
+
+# scan: generated redacted copies and quarantined files
+**/dlp-redacted/
+**/dlp-quarantine/
+
+# PolicyServer local policy store
+**/policy-data/
+
+# Secrets — never commit credentials or populated policy files
+*.secret
+*.env
+.env
+appsettings.*.local.json

@@ -1,0 +1,23 @@
+{
+  "$schema": "./url-policy.schema.json",
+  "version": 1,
+  "description": "Single source of truth for which destinations are monitored vs. blocked. Compiled into tool-specific exports by src/UrlPolicyCompiler. Monitoring is admin-managed and must be disclosed to users.",
+  "defaults": {
+    "monitorAction": "Audit",
+    "blockAction": "Block"
+  },
+  "monitor": [
+    { "domain": "chatgpt.com",        "category": "GenAI-Sanctioned", "reason": "Approved AI tool; watch for sensitive-data egress" },
+    { "domain": "chat.openai.com",    "category": "GenAI-Sanctioned", "reason": "Approved AI tool; watch for sensitive-data egress" },
+    { "domain": "claude.ai",          "category": "GenAI-Sanctioned", "reason": "Approved AI tool; watch for sensitive-data egress" },
+    { "domain": "gemini.google.com",  "category": "GenAI-Sanctioned", "reason": "Approved AI tool; watch for sensitive-data egress" },
+    { "domain": "copilot.microsoft.com", "category": "GenAI-Sanctioned", "reason": "Approved AI tool; watch for sensitive-data egress" }
+  ],
+  "block": [
+    { "domain": "*.pastebin.com",     "category": "Exfil-Risk",         "reason": "Common exfiltration destination" },
+    { "domain": "pastebin.com",       "category": "Exfil-Risk",         "reason": "Common exfiltration destination" },
+    { "domain": "anonfiles.com",      "category": "Exfil-Risk",         "reason": "Anonymous file sharing" },
+    { "domain": "poe.com",            "category": "GenAI-Unsanctioned", "reason": "Unapproved AI aggregator" },
+    { "domain": "prothomalo.com",            "category": "News paper", "reason": "Policy" }
+  ]
+}

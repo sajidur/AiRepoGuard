@@ -1,0 +1,16 @@
+{
+  "RepositoryMode": "CloudApproved",
+  "RequireCleanWorkingTree": true,
+  "RequireClaudeSettings": true,
+  "BlockOnPossibleSecrets": true,
+  "BlockIfScanIncomplete": true,
+  "MaximumFilesToScan": 20000,
+  "MaximumFileBytes": 2000000,
+  "ProtectedBranches": ["main", "master", "production", "prod", "release"],
+  "ExcludedDirectories": [".git", ".vs", "bin", "obj", "node_modules", "packages", "dist", "build", "coverage"],
+  "SensitiveFilePatterns": [
+    ".env", ".env.*", "**/.env", "**/.env.*", "**/secrets/**",
+    "**/*credentials*", "**/*.pem", "**/*.pfx", "**/appsettings.Production.json",
+    "**/*.bak", "**/*.sql.gz"
+  ]
+}

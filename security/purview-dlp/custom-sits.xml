@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Custom Sensitive Information Types (SITs) for Purview DLP.
+
+  These mirror the customRegexRules in dlp-policy.sample.json so that the
+  same internal patterns you scan repositories for are also detectable by
+  Purview endpoint DLP (clipboard, uploads, email, etc.).
+
+  Import with:  New-DlpSensitiveInformationTypeRulePackage
+  See README.md, step 3. Regenerate every GUID below with [guid]::NewGuid()
+  before publishing to your own tenant so the pack and entities are unique.
+-->
+<RulePackage xmlns="http://schemas.microsoft.com/office/2011/mce">
+  <RulePack id="9d75ebd3-6788-47db-b596-6815e16f4b9d">
+    <Version major="1" minor="0" build="0" revision="0" />
+    <Publisher id="2dc1ee6f-ed5d-4faf-a98a-a63fe9d31446" />
+    <Details defaultLangCode="en-us">
+      <LocalizedDetails langcode="en-us">
+        <PublisherName>Your Company</PublisherName>
+        <Name>Company AI-DLP Custom SITs</Name>
+        <Description>Internal employee IDs and service tokens for AI data-loss prevention.</Description>
+      </LocalizedDetails>
+    </Details>
+  </RulePack>
+
+  <Rules>
+    <!-- Internal service token: INT- followed by 32 alphanumerics. HIGH severity. -->
+    <Entity id="41f11ba7-380b-4dbb-b46d-fc825d893452" patternsProximity="300" recommendedConfidence="85">
+      <Pattern confidenceLevel="85">
+        <IdMatch idRef="Regex_internal_api_token" />
+      </Pattern>
+    </Entity>
+
+    <!-- Employee ID: EMP- followed by 6 digits. MEDIUM severity (PII). -->
+    <Entity id="c62e691d-886d-48ee-9e61-d24b2f380144" patternsProximity="300" recommendedConfidence="75">
+      <Pattern confidenceLevel="75">
+        <IdMatch idRef="Regex_employee_id" />
+      </Pattern>
+    </Entity>
+
+    <Regex id="Regex_internal_api_token">\bINT-[A-Za-z0-9]{32}\b</Regex>
+    <Regex id="Regex_employee_id">\bEMP-\d{6}\b</Regex>
+
+    <LocalizedStrings>
+      <Resource idRef="41f11ba7-380b-4dbb-b46d-fc825d893452">
+        <Name default="true" langcode="en-us">Company Internal Service Token</Name>
+        <Description default="true" langcode="en-us">Internal service token with the INT- prefix.</Description>
+      </Resource>
+      <Resource idRef="c62e691d-886d-48ee-9e61-d24b2f380144">
+        <Name default="true" langcode="en-us">Company Employee ID</Name>
+        <Description default="true" langcode="en-us">Internal employee identifier with the EMP- prefix.</Description>
+      </Resource>
+    </LocalizedStrings>
+  </Rules>
+</RulePackage>

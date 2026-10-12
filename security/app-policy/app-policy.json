@@ -1,0 +1,28 @@
+{
+  "$schema": "./app-policy.schema.json",
+  "version": 1,
+  "_comment": "Executables to block. Compiled to AppLocker XML by `airepoguard app-policy`. Start in AuditOnly (logs would-be blocks), switch to Enabled once reviewed. Applies to Everyone; AppLocker enforcement requires Windows Enterprise/Education (Pro can audit).",
+  "enforcementMode": "AuditOnly",
+  "block": [
+    {
+      "type": "path",
+      "name": "Block executables in Downloads",
+      "path": "%OSDRIVE%\\Users\\*\\Downloads\\*.exe",
+      "reason": "Stop running unvetted downloads"
+    },
+    {
+      "type": "path",
+      "name": "Block Tor browser",
+      "path": "*\\tor.exe",
+      "reason": "Anonymizer not permitted"
+    },
+    {
+      "type": "publisher",
+      "name": "Block uTorrent",
+      "publisher": "O=BITTORRENT, INC., L=SAN FRANCISCO, S=CALIFORNIA, C=US",
+      "product": "*",
+      "binary": "*",
+      "reason": "P2P client"
+    }
+  ]
+}

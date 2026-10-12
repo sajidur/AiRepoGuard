@@ -1,0 +1,24 @@
+{
+  "profiles": {
+    "run everything (default pipeline)": {
+      "commandName": "Project",
+      "commandLineArgs": ""
+    },
+    "help": {
+      "commandName": "Project",
+      "commandLineArgs": "help"
+    },
+    "scan repo (sample policy)": {
+      "commandName": "Project",
+      "commandLineArgs": "scan ..\\.. --policy dlp-policy.sample.json"
+    },
+    "url-policy": {
+      "commandName": "Project",
+      "commandLineArgs": "url-policy ..\\..\\security\\url-policy\\url-policy.json"
+    },
+    "app-policy": {
+      "commandName": "Project",
+      "commandLineArgs": "app-policy ..\\..\\security\\app-policy\\app-policy.json"
+    }
+  }
+}

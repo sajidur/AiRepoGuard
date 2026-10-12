@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://airepoguard/app-policy.schema.json",
+  "title": "Executable blocklist policy (compiles to AppLocker)",
+  "type": "object",
+  "required": ["version", "block"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "_comment": { "type": "string" },
+    "version": { "type": "integer", "minimum": 1 },
+    "enforcementMode": {
+      "type": "string",
+      "enum": ["NotConfigured", "AuditOnly", "Enabled"],
+      "description": "AuditOnly logs would-be blocks; Enabled enforces. Default AuditOnly."
+    },
+    "block": { "type": "array", "items": { "$ref": "#/definitions/rule" } }
+  },
+  "definitions": {
+    "rule": {
+      "type": "object",
+      "required": ["type"],
+      "additionalProperties": false,
+      "properties": {
+        "type": { "type": "string", "enum": ["path", "publisher", "hash"] },
+        "name": { "type": "string" },
+        "reason": { "type": "string" },
+        "path": { "type": "string", "description": "path rule: AppLocker path (wildcards, %OSDRIVE% etc.); hash rule: a file to hash" },
+        "publisher": { "type": "string", "description": "publisher rule: signer, e.g. O=CONTOSO, L=..., C=US" },
+        "product": { "type": "string" },
+        "binary": { "type": "string" }
+      }
+    }
+  }
+}

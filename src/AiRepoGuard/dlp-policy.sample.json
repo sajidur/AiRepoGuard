@@ -1,0 +1,46 @@
+﻿{
+  "excludedDirectories": [ ".git", "bin", "obj", "node_modules", "packages", "dist" ],
+  "maximumFilesToScan": 50000,
+  "maximumFileBytes": 5000000,
+  "sensitiveFilePatterns": [
+    ".env",
+    ".env.*",
+    "**/.env",
+    "**/.env.*",
+    "**/secrets/**",
+    "**/*.pem",
+    "**/*.pfx",
+    "**/*.bak",
+    "**/backup/**",
+    "**/*.sql.gz",
+    "**/HR/**",
+    "**/Payroll/**"
+  ],
+  "customRegexRules": [
+    {
+      "name": "EMPLOYEE_ID",
+      "category": "PII",
+      "severity": "MEDIUM",
+      "description": "Internal employee ID (EMP- prefix)",
+      "pattern": "\\bEMP-\\d{6}\\b",
+      "minMatches": 1
+    },
+    {
+      "name": "INTERNAL_API_TOKEN",
+      "category": "CRED",
+      "severity": "HIGH",
+      "description": "Internal service token",
+      "pattern": "\\bINT-[A-Za-z0-9]{32}\\b",
+      "minMatches": 1
+    }
+  ],
+  "edm": {
+    "referenceFiles": [ "./golden-records/customer-ids.txt" ],
+    "similarityThreshold": 0.35
+  },
+  "actions": {
+    "quarantineDirectory": "dlp-quarantine",
+    "writeRedactedCopy": true,
+    "redactedDirectory": "dlp-redacted"
+  }
+}

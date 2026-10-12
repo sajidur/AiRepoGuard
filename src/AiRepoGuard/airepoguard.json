@@ -1,0 +1,10 @@
+{
+  "_comment": "Default pipeline config, used when airepoguard runs with no arguments. Paths are relative to this file. Toggle steps or change paths here instead of passing command-line parameters.",
+  "repoPath": "..\\..",
+  "audit": true,
+  "scan": true,
+  "scanPolicy": "dlp-policy.sample.json",
+  "urlPolicy": "..\\..\\security\\url-policy\\url-policy.json",
+  "appPolicy": "..\\..\\security\\app-policy\\app-policy.json",
+  "collectReport": false
+}
